@@ -170,6 +170,71 @@ Totals     551133.27         0.00         0.00         2.88970         2.92700  
 - <b>Sets/sec : +30.34%</b>
 - <b>Latency : -44%</b>
 
+### Colruyt use case - pipelines - sockets
+```sh
+./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock --ratio=1:0 --test-time=120 -d 1500 -c 50 --pipeline=3000 -t 1
+```
+
+```sh
+ALL STATS
+============================================================================================================================
+Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
+----------------------------------------------------------------------------------------------------------------------------
+Sets       374726.37          ---          ---       399.45648       401.40700       425.98300       432.12700    566806.12
+Gets            0.00         0.00         0.00             ---             ---             ---             ---         0.00
+Waits           0.00          ---          ---             ---             ---             ---             ---          ---
+Totals     374726.37         0.00         0.00       399.45648       401.40700       425.98300       432.12700    566806.12
+```
+
+
+### Colruyt use case - pipelines - TCP
+```sh
+./memtier_benchmark/memtier_benchmark --ratio=1:0 --test-time=120 -d 1500 -c 50 --pipeline=3000 -t 1
+```
+
+```sh
+ALL STATS
+============================================================================================================================
+Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
+----------------------------------------------------------------------------------------------------------------------------
+Sets       329733.28          ---          ---       453.84694       456.70300       491.51900       511.99900    498750.15
+Gets            0.00         0.00         0.00             ---             ---             ---             ---         0.00
+Waits           0.00          ---          ---             ---             ---             ---             ---          ---
+Totals     329733.28         0.00         0.00       453.84694       456.70300       491.51900       511.99900    498750.15
+```
+
+### Colruyt use case - Variations
+- <b>Sets/sec : +12% </b>
+- <b>Latency : -13.62%</b>
+
+
+### Colruyt use case - MSETs of 3000 keys - socket
+```sh
+./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+```
+
+```sh
+ALL STATS
+==================================================================================================
+Type         Ops/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
+--------------------------------------------------------------------------------------------------
+Msets          83.76       597.38625       552.95900       974.84700      1023.99900    375652.58
+Totals         83.76       597.38625       552.95900       974.84700      1023.99900    375652.58
+```
+
+### Colruyt use case - MSETs of 3000 keys - TCP
+```sh
+./memtier_benchmark/memtier_benchmark -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+```
+
+Result : broke the machine. 
+
+### Colruyt use case - MSETs of 3000 keys - Variations
+- <b>Msets/sec : </b>
+- <b>Latency : </b>
+- <b> kb/sec : </b>
+
+
 # Links
 - https://gulchuk.com/blog/how-to-connect-to-redis-by-unix-socket-only 
 - https://github.com/redis/node-redis/issues/204
