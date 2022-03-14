@@ -1,6 +1,4 @@
-# unix_sockets
-
-# Redis with Unix Sockets benchmark
+# unix_sockets benchmark
 
 ## Configuration
 
