@@ -4,7 +4,7 @@
 
 Edit configuration file : 
 
-[!https://github.com/helenebrulin/unix_sockets/Config.png]
+![https://github.com/helenebrulin/unix_sockets/blob/main/Config.png]
 
 ```sh 
 root@helene-test:~# redis-server /etc/redis/redis.conf
