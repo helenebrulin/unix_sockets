@@ -7,9 +7,10 @@ Edit configuration file :
 ![](https://github.com/helenebrulin/unix_sockets/blob/main/Config.png)
 
 ```sh 
+# Restart server
 root@helene-test:~# redis-server /etc/redis/redis.conf
 
-#Test connection with redis-cli
+# Test connection with redis-cli
 root@helene-test:~# redis-cli -s /tmp/redis.sock
 redis /tmp/redis.sock>
 ```
