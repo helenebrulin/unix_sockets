@@ -23,6 +23,7 @@ redis /tmp/redis.sock>
 ./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock --ratio=1:4 --test-time=120 -d 150 -t 8 -c 5 --pipeline=40
 ```
 
+```sh
 ALL STATS
 ============================================================================================================================
 Type         Ops/sec     Hits/sec   Misses/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
@@ -31,6 +32,7 @@ Sets       178978.89          ---          ---         1.76954         1.75900  
 Gets       715915.57     18875.13    697040.44         1.76954         1.75900         2.75100         3.40700     30707.89
 Waits           0.00          ---          ---             ---             ---             ---             ---          ---
 Totals     894894.46     18875.13    697040.44         1.76954         1.75900         2.75100         3.40700     65295.61
+```
 
 
 ### Reads and Writes - TCP port : 
