@@ -170,6 +170,54 @@ Totals     551133.27         0.00         0.00         2.88970         2.92700  
 - <b>Sets/sec : +30.34%</b>
 - <b>Latency : -44%</b>
 
+
+## Colruyt use case
+Goal : 
+- Write 7.5GB or 5M keys of 1.5kb per second, with MSETs of 3000 keys.
+- 4 machines of 8 Cpus and 32 RAM. 50 clients. 
+
+
+### Colruyt use case - MSETs of 3000 keys - socket
+```sh
+./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+```
+
+```sh
+ALL STATS
+==================================================================================================
+Type         Ops/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
+--------------------------------------------------------------------------------------------------
+Msets         110.97       450.53612       440.31900       819.19900       913.40700    497692.44
+Totals        110.97       450.53612       440.31900       819.19900       913.40700    497692.44
+```
+
+Result : 
+- 111 * 3000 = 333000 keys written per sec per machine
+- 1 332 000 keys written per second with 4 machines.
+- Almost 2GB written per second. 
+- Goal not achieved.
+
+
+### Colruyt use case - MSETs of 3000 keys - TCP
+```sh
+./memtier_benchmark/memtier_benchmark -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+```
+
+```sh
+ALL STATS
+==================================================================================================
+Type         Ops/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
+--------------------------------------------------------------------------------------------------
+Msets          88.12       554.83211       511.99900       905.21500      1032.19100    395232.88
+Totals         88.12       554.83211       511.99900       905.21500      1032.19100    395232.88
+```
+
+
+### Colruyt use case - MSETs of 3000 keys - Variations
+- <b>Msets/sec : +20.59% </b>
+- <b>Latency : -23.15% </b>
+
+
 ### Colruyt use case - pipelines - sockets
 ```sh
 ./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock --ratio=1:0 --test-time=120 -d 1500 -c 50 --pipeline=3000 -t 1
@@ -208,31 +256,6 @@ Totals     329733.28         0.00         0.00       453.84694       456.70300  
 - <b>Latency : -13.62%</b>
 
 
-### Colruyt use case - MSETs of 3000 keys - socket
-```sh
-./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
-```
-
-```sh
-ALL STATS
-==================================================================================================
-Type         Ops/sec    Avg. Latency     p50 Latency     p99 Latency   p99.9 Latency       KB/sec
---------------------------------------------------------------------------------------------------
-Msets          83.76       597.38625       552.95900       974.84700      1023.99900    375652.58
-Totals         83.76       597.38625       552.95900       974.84700      1023.99900    375652.58
-```
-
-### Colruyt use case - MSETs of 3000 keys - TCP
-```sh
-./memtier_benchmark/memtier_benchmark -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
-```
-
-Result : broke the machine. 
-
-### Colruyt use case - MSETs of 3000 keys - Variations
-- <b>Msets/sec : </b>
-- <b>Latency : </b>
-- <b> kb/sec : </b>
 
 
 # Links
