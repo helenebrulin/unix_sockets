@@ -179,7 +179,7 @@ Goal :
 
 ### Colruyt use case - MSETs of 3000 keys - socket
 ```sh
-./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=60
 ```
 
 ```sh
@@ -197,10 +197,12 @@ Result :
 - Almost 2GB written per second. 
 - Goal not achieved.
 
+Notes : using 4/8 threads and 12/6 clients doesn't change anything.
+
 
 ### Colruyt use case - MSETs of 3000 keys - TCP
 ```sh
-./memtier_benchmark/memtier_benchmark -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=120
+./memtier_benchmark/memtier_benchmark -d 1500 --command="MSET __key__ __data__  __key__ __data__ .... --command-ratio=1 --command-key-pattern=P --clients=50 --threads=1 --test-time=60
 ```
 
 ```sh
@@ -220,7 +222,7 @@ Totals         88.12       554.83211       511.99900       905.21500      1032.1
 
 ### Colruyt use case - pipelines - sockets
 ```sh
-./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock --ratio=1:0 --test-time=120 -d 1500 -c 50 --pipeline=3000 -t 1
+./memtier_benchmark/memtier_benchmark --unix-socket=/tmp/redis.sock --ratio=1:0 --test-time=60 -d 1500 -c 50 --pipeline=3000 -t 1
 ```
 
 ```sh
@@ -237,7 +239,7 @@ Totals     374726.37         0.00         0.00       399.45648       401.40700  
 
 ### Colruyt use case - pipelines - TCP
 ```sh
-./memtier_benchmark/memtier_benchmark --ratio=1:0 --test-time=120 -d 1500 -c 50 --pipeline=3000 -t 1
+./memtier_benchmark/memtier_benchmark --ratio=1:0 --test-time=60 -d 1500 -c 50 --pipeline=3000 -t 1
 ```
 
 ```sh
@@ -254,8 +256,6 @@ Totals     329733.28         0.00         0.00       453.84694       456.70300  
 ### Colruyt use case - Variations
 - <b>Sets/sec : +12% </b>
 - <b>Latency : -13.62%</b>
-
-
 
 
 # Links
