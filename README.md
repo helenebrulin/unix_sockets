@@ -197,7 +197,7 @@ Result :
 - Almost 2GB written per second. 
 - Goal not achieved.
 
-Notes : using 4/8 threads and 12/6 clients doesn't change anything.
+Notes : using 4/8 threads and 12/6 clients doesn't change much, msets/sec are a bit lower.
 
 
 ### Colruyt use case - MSETs of 3000 keys - TCP
